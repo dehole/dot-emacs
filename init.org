@@ -1,5 +1,5 @@
 #+TITLE: Emacs configuration file
-#+AUTHOR: Lars Tveito
+#+AUTHOR: dehole
 #+BABEL: :cache yes
 #+LATEX_HEADER: \usepackage{parskip}
 #+LATEX_HEADER: \usepackage{inconsolata}
@@ -7,6 +7,9 @@
 #+PROPERTY: header-args :tangle yes
 
 * About
+
+  This emacs configuration started from the work that Lars Tveito put into his
+  emacs org file [[https://github.com/larstvei/dot-emacs][here]].
 
   This is an Emacs configuration file written in [[http://orgmode.org][Org mode]]. It is an attempt
   to keep my =~/.emacs.d= tidy, but still be able to keep it all in one
