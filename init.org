@@ -396,7 +396,7 @@
    Change the color-theme to =leuven=.
 
    #+BEGIN_SRC emacs-lisp
-   (load-theme 'leuven t)
+   (load-theme 'material t)
    #+END_SRC
 
    =leuven= is my preferred light theme, but =monokai= makes a very nice
@@ -405,14 +405,17 @@
    #+BEGIN_SRC emacs-lisp
    (defun cycle-themes ()
      "Returns a function that lets you cycle your themes."
-     (lexical-let ((themes '#1=(leuven material . #1#)))
+     (lexical-let ((themes '#1=(material . #1#)))
        (lambda ()
          (interactive)
          ;; Rotates the thme cycle and changes the current theme.
          (load-theme (car (setq themes (cdr themes))) t))))
    #+END_SRC
 
-   Use the [[http://www.levien.com/type/myfonts/inconsolata.html][Inconsolata]] font if it's installed on the system.
+   Use the [[http://www.levien.com/type/myfonts/inconsolata.html][Inconsolata]] font if it's installed on the system. For Ubuntu it can
+   be installed by using apt-get: [[https://blog.programster.org/ubuntu-14-04-install-inconsolata-monospace-font][Instructions]]. For Windows, it can be
+   installed by first downloading the OpenType file from Inconsolata's website,
+   and then installing it by right clicking the file and select Install.
 
    #+BEGIN_SRC emacs-lisp
    (cond ((member "Hasklig" (font-family-list))
