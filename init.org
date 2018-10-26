@@ -11,6 +11,8 @@
   This emacs configuration started from the work that Lars Tveito put into his
   emacs org file [[https://github.com/larstvei/dot-emacs][here]].
 
+  Another literate org file reference can be found [[http://mescal.imag.fr/membres/arnaud.legrand/misc/init.php][Here]]. 
+
   This is an Emacs configuration file written in [[http://orgmode.org][Org mode]]. It is an attempt
   to keep my =~/.emacs.d= tidy, but still be able to keep it all in one
   file. I aim to briefly explain all my configurations as I go along!
@@ -198,11 +200,19 @@
              maude-mode           ; Emacs mode for the programming language Maude
              multiple-cursors     ; Multiple cursors for Emacs
              olivetti             ; Minor mode for a nice writing environment
+             ob-ipython           ; org-babel functions for IPython evaluation
+             ob-kotlin            ; org-babel functions for kotlin evaluation
+             ob-async             ; org-babel functions for async operations
+             ob-rust              ; org-babel functions for rust evaluation
+             ob-tmux              ; org-babel functions for tmux operations
              org                  ; Outline-based notes management and organizer
              org-ref              ; citations bibliographies in org-mode
+             ox-pandoc            ; Exporter for Org mode to pandoc
              paredit              ; minor mode for editing parentheses
              pdf-tools            ; Emacs support library for PDF files
              projectile           ; Manage and navigate projects in Emacs easily
+             pyvenv               ; Python virtual environments
+             pyenv-virtualenv     ; virtualenv plugin
              slime                ; Superior Lisp Interaction Mode for Emacs
              try                  ; Try out Emacs packages
              which-key)))         ; Display available keybindings in popup
@@ -235,6 +245,19 @@
      (exec-path-from-shell-initialize)
      (when (fboundp 'mac-auto-operator-composition-mode)
        (mac-auto-operator-composition-mode 1)))'
+   #+END_SRC
+
+** Windows 10
+
+   Note: This is a work in progress.  So far it doesn't seem to work.
+
+   #+BEGIN_SRC emacs-lisp
+   (when (memq window-system '(w32 win32 windows-nt))
+     (setq explicit-shell-file-name "C:/Windows/System32/bash.exe")
+     (setq shell-file-name "bash")
+     (setq explicit-bash.exe-args '("--noediting" "--login" "-i"))
+     (setenv "SHELL" shell-file-name)
+     (add-hook 'comint-output-filter-functions 'comint-strip-ctrl-m))
    #+END_SRC
 
 ** Require
@@ -762,6 +785,58 @@
      '(progn
         (setcar (nthcdr 2 org-emphasis-regexp-components) " \t\n,")
         (custom-set-variables `(org-emphasis-alist ',org-emphasis-alist))))
+   #+END_SRC
+
+** Org Babel
+
+   Org makes it easy to include source code blocks alongside text passages and
+   then execute it with Org Babel.
+
+
+   #+BEGIN_SRC emacs-lisp
+   (org-babel-do-load-languages
+    'org-babel-load-languages
+    '(
+      (python . t)
+      (ipython . t)
+      (kotlin . t)
+      (async . t)
+      (rust . t)
+      (tmux . t)
+      (shell . t)
+      ;; Include other languages here...
+      ))
+   #+END_SRC
+
+   There are some additional options that we can include.
+
+   #+BEGIN_SRC emacs-lisp
+   ;; Syntax highlight in #+BEGIN_SRC blocks
+   (setq org-src-fontify-natively t)
+   ;; Don't prompt before running code in org
+   (setq org-confirm-babel-evaluate nil)
+
+   (add-hook 'org-babel-after-execute-hook 'org-redisplay-inline-images)
+
+   #+END_SRC
+
+*** References
+**** [[http://cachestocaches.com/2018/6/org-literate-programming/][org-literate-programming]]
+
+
+
+** Babel Python
+
+
+   #+BEGIN_SRC emacs-lisp
+   ;; Fix an incompatibility between the ob-async and ob-ipython packages
+   (setq ob-async-no-async-languages-alist '("ipython"))
+   #+END_SRC
+
+** Python
+
+   #+BEGIN_SRC emacs-lisp
+   (setq python-shell-interpreter "c:/Python37/python.exe")
    #+END_SRC
 
 ** Interactive functions
