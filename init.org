@@ -200,18 +200,15 @@
              maude-mode           ; Emacs mode for the programming language Maude
              multiple-cursors     ; Multiple cursors for Emacs
              olivetti             ; Minor mode for a nice writing environment
-             ob-ipython           ; org-babel functions for IPython evaluation
-             ob-kotlin            ; org-babel functions for kotlin evaluation
              ob-async             ; org-babel functions for async operations
-             ob-rust              ; org-babel functions for rust evaluation
-             ob-tmux              ; org-babel functions for tmux operations
+             ob-ipython           ; org-babel functions for ipython
              org                  ; Outline-based notes management and organizer
              org-ref              ; citations bibliographies in org-mode
              ox-pandoc            ; Exporter for Org mode to pandoc
              paredit              ; minor mode for editing parentheses
              pdf-tools            ; Emacs support library for PDF files
              projectile           ; Manage and navigate projects in Emacs easily
-             pyvenv               ; Python virtual environments
+             pyvenv               ; Python Pkg for managing virtualenvs
              pyenv-virtualenv     ; virtualenv plugin
              slime                ; Superior Lisp Interaction Mode for Emacs
              try                  ; Try out Emacs packages
@@ -797,12 +794,9 @@
    (org-babel-do-load-languages
     'org-babel-load-languages
     '(
-      (python . t)
       (ipython . t)
-      (kotlin . t)
+      (python . t)
       (async . t)
-      (rust . t)
-      (tmux . t)
       (shell . t)
       ;; Include other languages here...
       ))
